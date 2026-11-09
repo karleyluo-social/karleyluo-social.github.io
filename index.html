@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karley Luo — Creator Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Cream page, espresso type, one claret accent */
+  --page: #f3ece1;
+  --panel: #ebe2d4;
+  --line: #d6cbbb;
+  --ink: #1f1a17;
+  --muted: #5f544b;
+  --claret: #8a3a40;
+  /* category accents: one color per "beautiful" world, all on the same neutrals */
+  --sage: #56704f;
+  --rose: #9c5266;
+  --jade: #3d7468;
+  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --read: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  /* Layout idea: work first. Rows of phone screens by category, details on tap, the rest below */
+  color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--page); scroll-behavior: smooth; scroll-padding-top: 76px; }
+body { background: var(--page); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--claret); outline-offset: 3px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 48px); }
+.label { font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; text-decoration: none; cursor: pointer;
+  font-family: var(--body); font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 14px 24px; background: var(--ink); color: var(--page); border: 1px solid var(--ink);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn:hover { background: var(--claret); border-color: var(--claret); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: var(--page); border-color: var(--ink); }
+
+/* ---------- top bar ---------- */
+.bar { position: sticky; top: 0; z-index: 20; background: rgba(243, 236, 225, 0.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+.logo { font-family: var(--display); font-size: 24px; text-decoration: none; letter-spacing: -0.01em; }
+.logo em { color: var(--claret); }
+.tabs { display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs a { text-decoration: none; white-space: nowrap; padding: 6px 0; border-bottom: 1px solid transparent; }
+.tabs a:hover, .tabs a.on { color: var(--ink); border-bottom-color: var(--accent, var(--claret)); }
+.bar .btn { padding: 10px 16px; font-size: 12px; }
+
+/* ---------- intro ---------- */
+.intro { padding: clamp(36px, 6vw, 64px) 0 clamp(24px, 4vw, 40px); display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: end; }
+.intro h1 { font-family: var(--display); font-weight: 400; font-size: clamp(52px, 9vw, 104px); line-height: 0.9; letter-spacing: -0.03em; }
+.intro h1 em { color: var(--claret); }
+.intro .tagline { font-family: var(--display); font-style: italic; font-size: clamp(26px, 3.6vw, 38px); line-height: 1.15; margin-top: 20px; }
+.intro .tagline em { color: var(--claret); }
+.intro .sub { color: var(--muted); font-size: 16.5px; max-width: 44ch; margin-top: 10px; }
+.intro .cta { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ---------- category rows ---------- */
+#work { display: flex; flex-direction: column; }
+.cat { padding: 36px 0 44px; border-top: 1px solid var(--line); }
+.cat-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.cat-head h2 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 4.4vw, 46px); line-height: 1; letter-spacing: -0.015em; }
+.cat-head h2 em { font-style: italic; color: var(--accent, var(--claret)); }
+.cat-head .pursuit { display: block; margin-bottom: 8px; }
+.cat-head p { color: var(--muted); font-size: 15.5px; max-width: 46ch; }
+.cat.linked .cat-head h2::after { content: "Picked for you"; font-family: var(--body); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent, var(--claret)); border: 1px solid var(--accent, var(--claret)); padding: 4px 8px; margin-left: 14px; vertical-align: middle; position: relative; top: -6px; }
+
+.phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 2.4vw, 28px); }
+.phone { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 12px; }
+.screen {
+  aspect-ratio: 9 / 16; border-radius: 26px; overflow: hidden; position: relative;
+  border: 6px solid var(--ink); background: var(--panel);
+  box-shadow: 0 18px 40px -24px rgba(31, 26, 23, 0.45);
+  transition: transform 0.25s ease;
+}
+.phone:hover .screen, .phone:focus-visible .screen { transform: translateY(-4px); }
+.phone:focus-visible { outline: none; }
+.phone:focus-visible .screen { outline: 2px solid var(--claret); outline-offset: 4px; }
+.screen video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 16px;
+  background: radial-gradient(120% 70% at 30% 18%, color-mix(in srgb, var(--accent, var(--claret)) 16%, transparent), transparent 60%), linear-gradient(170deg, #e7ddce 0%, #d6c8b4 100%);
+}
+.phone:nth-child(2) .ph { background: radial-gradient(110% 60% at 70% 25%, rgba(255, 255, 255, 0.5), transparent 60%), linear-gradient(190deg, #e3d8c7 0%, #d0c1ab 100%); }
+.phone:nth-child(3) .ph { background: radial-gradient(100% 60% at 50% 85%, rgba(95, 84, 75, 0.14), transparent 60%), linear-gradient(175deg, #e9e0d2 0%, #d8cab7 100%); }
+.ph .soon { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.ph .play { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--ink); display: grid; place-items: center; align-self: center; }
+.ph .play::before { content: ""; border-left: 12px solid var(--ink); border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px; }
+.ph .cap { font-family: var(--read); font-size: 18px; line-height: 1.2; }
+.meta { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; padding: 0 4px; }
+.meta b { font-family: var(--read); font-weight: 500; font-size: 18px; line-height: 1.25; }
+.meta span { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent, var(--claret)); white-space: nowrap; }
+
+/* ---------- detail dialog ---------- */
+dialog { border: 0; padding: 0; background: var(--page); color: var(--ink); width: min(980px, calc(100% - 24px)); max-height: calc(100% - 24px); margin: auto; box-shadow: 0 30px 80px -20px rgba(31, 26, 23, 0.5); }
+dialog::backdrop { background: rgba(31, 26, 23, 0.55); }
+.detail { display: grid; grid-template-columns: minmax(220px, 340px) 1fr; gap: clamp(20px, 4vw, 48px); padding: clamp(20px, 4vw, 44px); position: relative; }
+.detail .screen { box-shadow: none; }
+.close { all: unset; cursor: pointer; position: absolute; top: 12px; right: 14px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; padding: 8px; color: var(--muted); }
+.close:hover { color: var(--ink); }
+.close:focus-visible { outline: 2px solid var(--claret); }
+.info { display: flex; flex-direction: column; gap: 18px; padding-top: 8px; }
+.info .tagrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid var(--line); padding: 5px 9px; color: var(--muted); }
+.tag.cat-tag { border-color: var(--accent, var(--claret)); color: var(--accent, var(--claret)); }
+.info h3 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 3.6vw, 42px); line-height: 1.05; letter-spacing: -0.015em; text-wrap: balance; }
+.info .lead { font-family: var(--read); font-size: 19px; line-height: 1.4; }
+.qa { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.qa div { padding: 14px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 150px 1fr; gap: 16px; }
+.qa dt { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.qa dd { font-size: 15.5px; }
+.qa ul { list-style: none; display: grid; gap: 4px; }
+.qa li::before { content: "— "; color: var(--accent, var(--claret)); }
+.info .btn:hover { background: var(--accent, var(--claret)); border-color: var(--accent, var(--claret)); }
+.info .btn.ghost:hover { background: var(--ink); border-color: var(--ink); }
+.info .cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+
+/* ---------- below the work ---------- */
+.band { padding: clamp(48px, 7vw, 80px) 0; border-top: 1px solid var(--line); }
+.idea { display: grid; grid-template-columns: 200px 1fr; gap: 24px; }
+.idea p { font-family: var(--read); font-size: clamp(22px, 2.8vw, 30px); line-height: 1.3; max-width: 36ch; text-wrap: balance; }
+.idea p em { color: var(--claret); }
+.about { display: grid; grid-template-columns: 200px 1fr 1fr; gap: 24px; }
+.about .lede { font-family: var(--read); font-size: 20px; line-height: 1.45; max-width: 40ch; }
+.stat { margin-top: 24px; display: flex; gap: 14px; align-items: baseline; }
+.stat b { font-family: var(--display); font-weight: 400; font-size: 56px; line-height: 1; }
+.stat span { color: var(--muted); font-size: 15px; max-width: 22ch; }
+.creds { list-style: none; }
+.creds li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 15.5px; }
+.creds li:last-child { border-bottom: 1px solid var(--line); }
+.creds li span:last-child { color: var(--muted); text-align: right; }
+.pk { display: grid; grid-template-columns: 200px repeat(3, 1fr); gap: 24px; }
+.pkg { border-top: 1px solid var(--ink); padding-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.pkg h3 { font-family: var(--read); font-weight: 500; font-size: 23px; }
+.pkg p { color: var(--muted); font-size: 15.5px; }
+.pkg small { margin-top: auto; padding-top: 8px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+.contact { padding: clamp(64px, 9vw, 110px) 0 48px; border-top: 1px solid var(--line); }
+.contact h2 { font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(44px, 8vw, 96px); line-height: 0.95; letter-spacing: -0.025em; }
+.contact p { color: var(--muted); max-width: 46ch; margin-top: 18px; }
+.contact .cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+.contact .email { margin-top: 18px; font-size: 16px; }
+.socials { display: flex; gap: 26px; flex-wrap: wrap; margin-top: 40px; }
+.socials a { text-decoration: none; }
+footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 24px 0 40px; border-top: 1px solid var(--line); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 880px) {
+  .intro { grid-template-columns: 1fr; }
+  .idea, .about, .pk { grid-template-columns: 1fr; gap: 16px; }
+  .detail { grid-template-columns: 1fr; }
+  .detail .screen { max-width: 260px; margin: 0 auto; }
+  .qa div { grid-template-columns: 1fr; gap: 4px; }
+  .bar .tabs { display: none; }
+}
+@media (max-width: 640px) {
+  .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin: 0 calc(-1 * clamp(18px, 4vw, 48px)); padding: 0 clamp(18px, 4vw, 48px) 8px; scrollbar-width: none; }
+  .phones::-webkit-scrollbar { display: none; }
+  .phone { flex: 0 0 68%; scroll-snap-align: start; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top">Karley <em>Luo</em></a>
+    <nav class="tabs label" id="tabs" aria-label="Categories"></nav>
+    <a class="btn" href="#contact">Let's collaborate</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <div class="intro">
+      <div>
+        <h1>Karley <em>Luo</em></h1>
+        <p class="tagline">In pursuit of a <em>beautiful life.</em></p>
+        <p class="sub">Movement, style, ritual and a good glass of wine. Content about filling everyday life with the things that make it beautiful.</p>
+      </div>
+      <div class="cta">
+        <a class="btn" href="#contact">Let's collaborate</a>
+      </div>
+    </div>
+    <div id="work"></div>
+  </div>
+
+  <section class="band">
+    <div class="wrap idea">
+      <span class="label">The idea</span>
+      <p>Beautiful things belong in every part of a day. <em>One piece, worn to class, out to a long dinner, packed for a weekend away.</em> One partnership, content for every channel.</p>
+    </div>
+  </section>
+
+  <section class="band" id="about">
+    <div class="wrap about">
+      <span class="label">About</span>
+      <div>
+        <p class="lede">I'm a Pilates instructor in New York with a background in consulting and investing. My content looks like a magazine and is built like a strategy, because I know why things convert.</p>
+        <div class="stat"><b>8–10%</b><span>average engagement rate on Instagram</span></div>
+      </div>
+      <ul class="creds">
+        <li><span>Pilates &amp; Lagree instructor</span><span>SLT, NYC</span></li>
+        <li><span>Comprehensive Mat certification</span><span>Gramercy Pilates</span></li>
+        <li><span>Sommelier, Level 1</span><span>Certified</span></li>
+        <li><span>Consulting</span><span>West Monroe</span></li>
+        <li><span>Investment associate</span><span>Loomis</span></li>
+        <li><span>Economics</span><span>UC Berkeley</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap pk">
+      <span class="label">Ways to work together</span>
+      <div class="pkg"><h3>Single video</h3><p>One vertical video in the format you choose, with raw footage.</p><small>Rates on request</small></div>
+      <div class="pkg"><h3>The full day</h3><p>One product across studio, city and travel. Three videos, one story.</p><small>Rates on request</small></div>
+      <div class="pkg"><h3>Monthly</h3><p>Fresh content every month for paid and organic.</p><small>Rates on request</small></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="contact" id="contact">
+      <span class="label">Contact</span>
+      <h2>Let's make<br>something.</h2>
+      <p>Tell me about your brand and what you'd love to make, or book a short call to talk it through.</p>
+      <div class="cta">
+        <a class="btn" id="mailBtn" href="mailto:karley.luo@gmail.com?subject=Collaboration">Email me</a>
+        <a class="btn ghost" id="chatBtn" href="#contact">Schedule a chat</a>
+      </div>
+      <p class="email">karley.luo@gmail.com</p>
+      <div class="socials label">
+        <a href="#contact">Instagram</a>
+        <a href="#contact">TikTok</a>
+        <a href="#contact">Substack</a>
+        <a href="#contact">Pinterest</a>
+      </div>
+    </section>
+    <footer class="label"><span>Karley Luo</span><span>New York, 2026</span></footer>
+  </div>
+</main>
+
+<dialog id="dlg" aria-labelledby="dTitle">
+  <div class="detail">
+    <button class="close" id="dClose" type="button">Close</button>
+    <div class="screen" id="dScreen"></div>
+    <div class="info">
+      <div class="tagrow" id="dTags"></div>
+      <h3 id="dTitle"></h3>
+      <p class="lead" id="dLead"></p>
+      <dl class="qa">
+        <div><dt>What it shows</dt><dd id="dShows"></dd></div>
+        <div><dt>Why it works</dt><dd id="dWhy"></dd></div>
+        <div><dt>Great for</dt><dd id="dFor"></dd></div>
+      </dl>
+      <div class="cta">
+        <a class="btn" id="dCollab" href="#contact">Let's collaborate</a>
+        <a class="btn ghost" id="dChat" href="#contact">Schedule a chat</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* ===== Edit here =====
+   EMAIL: where "Let's collaborate" goes.
+   CHAT_LINK: paste a Calendly (or similar) link to make "Schedule a chat" book a call.
+   For each video: src is the video file (leave "" until it's added). */
+const EMAIL = "karley.luo@gmail.com";
+const CHAT_LINK = "";
+
+const CATEGORIES = [
+  { id: "fitness", name: "Fitness", accent: "var(--sage)", title: "beautiful <em>movement</em>",
+    blurb: "Shot by a certified instructor, in real studios, on a body that actually works out.",
+    videos: [
+      { src: "", title: "Reformer flow", format: "In motion",
+        lead: "A full reformer sequence with the product on a moving body.",
+        shows: ["How the piece moves, stretches and holds up mid-workout", "Real studio setting, not a staged set"],
+        why: "Movement proves performance claims better than a flat lay. Coming from an instructor, it reads as an expert's pick.",
+        greatFor: ["Activewear and sports bras", "Grip socks", "Shapewear", "Recovery tools"] },
+      { src: "", title: "Day of a Pilates instructor", format: "Day in the life",
+        lead: "Teaching, moving and the small rituals between classes.",
+        shows: ["The product used naturally through a teaching day", "Studio to street outfit changes"],
+        why: "Day-in-the-life videos hold attention and make a product feel like part of a routine, not an ad.",
+        greatFor: ["Activewear", "Water bottles and electrolytes", "Gym bags", "Sweat-proof skincare"] },
+      { src: "", title: "Instructor's honest review", format: "To camera",
+        lead: "A straight-to-camera review from someone who teaches every day.",
+        shows: ["Clear product benefits in the first few seconds", "Expert credibility, warm delivery"],
+        why: "To-camera testimonials are the strongest format for paid ads, and an instructor's opinion carries trust.",
+        greatFor: ["Fitness tech and wearables", "Recovery products", "Supplements"] }
+    ] },
+  { id: "fashion", name: "Fashion", accent: "var(--rose)", title: "beautiful <em>things</em>",
+    blurb: "Editorial styling with a vintage eye. Fit, fabric and how a piece really wears.",
+    videos: [
+      { src: "", title: "One top, three ways", format: "Try-on &amp; styling",
+        lead: "A single piece styled for the studio, the office and dinner.",
+        shows: ["Versatility: one product, three outfits", "Close-ups of fit and fabric"],
+        why: "Showing range answers the shopper's real question, which is whether they'll actually wear it.",
+        greatFor: ["Basics and bodysuits", "Shapewear", "Knitwear", "Capsule wardrobe brands"] },
+      { src: "", title: "Vintage find, styled", format: "Styling",
+        lead: "From my Vintage Finds series: a thrifted piece styled with new pieces.",
+        shows: ["Personal style and taste", "Mixing vintage with modern brands"],
+        why: "My best-performing series. Style-led content builds trust that carries over to the brands in it.",
+        greatFor: ["Accessories and jewelry", "Bags and shoes", "Resale platforms"] },
+      { src: "", title: "Honest fit check", format: "To camera",
+        lead: "What fits, what doesn't and who it's for, said plainly.",
+        shows: ["Real fit notes on a real body", "Sizing guidance shoppers look for"],
+        why: "Fit is the top reason for returns. Honest fit content helps conversions and cuts returns.",
+        greatFor: ["Intimates and loungewear", "Denim", "Tops and dresses"] }
+    ] },
+  { id: "wellness", name: "Wellness", accent: "var(--jade)", title: "beautiful <em>rituals</em>",
+    blurb: "Calm, considered wellness, including traditional Chinese medicine rituals from my family.",
+    videos: [
+      { src: "", title: "A TCM ritual, explained", format: "To camera",
+        lead: "A traditional Chinese medicine practice, explained simply.",
+        shows: ["Education that feels personal", "The product as part of a ritual"],
+        why: "My wellness content converts views to follows. Teaching something new makes the product memorable.",
+        greatFor: ["Teas and tonics", "Supplements", "Skincare"] },
+      { src: "", title: "Morning reset", format: "Editorial b-roll",
+        lead: "A slow, cinematic morning routine in soft light.",
+        shows: ["Aesthetic detail shots", "Footage your team can cut into its own ads"],
+        why: "Moody, premium visuals lift a brand's perceived quality and work across paid and organic.",
+        greatFor: ["Skincare", "Candles and home", "Sleepwear"] },
+      { src: "", title: "Recovery night in", format: "Day in the life",
+        lead: "A slow evening in after teaching.",
+        shows: ["Rest as something to enjoy, not earn", "Product used in context"],
+        why: "Recovery is a fast-growing category, and it lands best from someone who trains for a living.",
+        greatFor: ["Loungewear", "Bath and body", "Recovery tools"] }
+    ] },
+  { id: "lifestyle", name: "Lifestyle", accent: "var(--claret)", title: "a beautiful <em>day</em>",
+    blurb: "New York, savored: slow mornings, vintage shops, long dinners and weekends away.",
+    videos: [
+      { src: "", title: "A slow Saturday in the city", format: "Day in the life",
+        lead: "Class, coffee, a vintage shop and a long dinner with friends.",
+        shows: ["One outfit or product carried through a full day", "The New York life my audience follows me for"],
+        why: "This is the heart of my brand: a day full of things I love, with your product as one of them. It feels like a recommendation, not an ad.",
+        greatFor: ["Bags", "Fragrance and beauty", "Footwear", "Everyday clothing"] },
+      { src: "", title: "The sommelier's pick", format: "To camera",
+        lead: "Choosing the wine at dinner, with a Level 1 sommelier's eye.",
+        shows: ["Expertise delivered casually", "Restaurant and dinner settings"],
+        why: "Real expertise makes recommendations more believable, and food and wine content is highly shareable.",
+        greatFor: ["Wine and spirits", "Restaurants", "Glassware and hosting"] },
+      { src: "", title: "Packing for a weekend away", format: "Try-on &amp; styling",
+        lead: "What I bring for three slow days away, all in one bag.",
+        shows: ["Products chosen for real use", "Travel outfits and essentials"],
+        why: "Packing videos are saved and rewatched, which keeps a product in front of shoppers longer.",
+        greatFor: ["Luggage", "Travel-size beauty", "Loungewear", "Versatile clothing"] }
+    ] }
+];
+
+/* ===== Page logic ===== */
+const work = document.getElementById("work");
+const tabs = document.getElementById("tabs");
+
+function screenHTML(v) {
+  if (v.src) return `<video src="${v.src}" muted loop playsinline autoplay preload="metadata"></video>`;
+  return `<div class="ph"><span class="soon">Video coming</span><span class="play" aria-hidden="true"></span><span class="cap">${v.title}</span></div>`;
+}
+
+CATEGORIES.forEach(c => {
+  const sec = document.createElement("section");
+  sec.className = "cat"; sec.id = c.id;
+  sec.style.setProperty("--accent", c.accent);
+  sec.innerHTML = `
+    <div class="cat-head"><div><span class="label pursuit">${c.name} · In pursuit of</span><h2>${c.title}</h2></div><p>${c.blurb}</p></div>
+    <div class="phones">${c.videos.map((v, i) => `
+      <button class="phone" type="button" data-cat="${c.id}" data-i="${i}" aria-label="Open ${v.title}">
+        <div class="screen">${screenHTML(v)}</div>
+        <div class="meta"><b>${v.title}</b><span>${v.format}</span></div>
+      </button>`).join("")}
+    </div>`;
+  work.appendChild(sec);
+  const a = document.createElement("a");
+  a.href = "#" + c.id; a.textContent = c.name; a.dataset.cat = c.id;
+  a.style.setProperty("--accent", c.accent);
+  tabs.appendChild(a);
+});
+
+const chatHref = CHAT_LINK || "#contact";
+document.getElementById("chatBtn").href = chatHref;
+
+/* A link ending in #fashion (etc.) moves that row to the top */
+function applyHash() {
+  const id = location.hash.slice(1);
+  const sec = document.getElementById(id);
+  document.querySelectorAll(".cat").forEach(s => s.classList.remove("linked"));
+  tabs.querySelectorAll("a").forEach(a => a.classList.toggle("on", a.dataset.cat === id));
+  if (sec && sec.classList.contains("cat")) {
+    work.prepend(sec);
+    sec.classList.add("linked");
+  }
+}
+applyHash();
+window.addEventListener("hashchange", applyHash);
+
+/* Detail view */
+const dlg = document.getElementById("dlg");
+const $ = id => document.getElementById(id);
+work.addEventListener("click", e => {
+  const btn = e.target.closest(".phone");
+  if (!btn) return;
+  const c = CATEGORIES.find(x => x.id === btn.dataset.cat);
+  const v = c.videos[+btn.dataset.i];
+  dlg.style.setProperty("--accent", c.accent);
+  $("dScreen").innerHTML = v.src
+    ? `<video src="${v.src}" controls playsinline autoplay loop></video>`
+    : screenHTML(v);
+  $("dTags").innerHTML = `<span class="tag cat-tag">${c.name}</span><span class="tag">${v.format}</span>`;
+  $("dTitle").innerHTML = v.title;
+  $("dLead").textContent = v.lead;
+  $("dShows").innerHTML = `<ul>${v.shows.map(s => `<li>${s}</li>`).join("")}</ul>`;
+  $("dWhy").textContent = v.why;
+  $("dFor").innerHTML = `<ul>${v.greatFor.map(s => `<li>${s}</li>`).join("")}</ul>`;
+  const subject = encodeURIComponent(`Collaboration: ${c.name}, ${v.title.replace(/&amp;/g, "&")}`);
+  $("dCollab").href = `mailto:${EMAIL}?subject=${subject}`;
+  $("dChat").href = chatHref;
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+});
+function closeDlg() { const vid = dlg.querySelector("video"); if (vid) vid.pause(); dlg.close ? dlg.close() : dlg.removeAttribute("open"); }
+$("dClose").addEventListener("click", closeDlg);
+dlg.addEventListener("click", e => { if (e.target === dlg) closeDlg(); });
+dlg.addEventListener("close", () => { const vid = dlg.querySelector("video"); if (vid) vid.pause(); });
+$("dChat").addEventListener("click", () => { if (!CHAT_LINK) closeDlg(); });
+</script>
+</body>
+</html>
