@@ -20,6 +20,7 @@
   --sage: #56704f;
   --rose: #9c5266;
   --jade: #3d7468;
+  --plum: #74476a;
   --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
   --read: "Newsreader", "Iowan Old Style", Georgia, serif;
   --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
@@ -278,10 +279,12 @@ footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wr
    For each video: src is the video file (leave "" until it's added). */
 const EMAIL = "karley.luo@gmail.com";
 const CHAT_LINK = "";
+/* While building: true shows "Video coming" frames. At launch: false hides them, and rows with no videos disappear. */
+const SHOW_PLACEHOLDERS = true;
 
 const CATEGORIES = [
-  { id: "fitness", name: "Fitness", accent: "var(--sage)", title: "beautiful <em>movement</em>",
-    blurb: "Shot by a certified instructor, in real studios, on a body that actually works out.",
+  { id: "movement", name: "Movement", accent: "var(--sage)", title: "beautiful <em>movement</em>",
+    blurb: "Pilates, activewear and the studio, through the eyes of a certified instructor.",
     videos: [
       { src: "videos/movement-1.mp4", poster: "videos/movement-1.jpg", title: "Cute activewear that isn't leggings", format: "To camera",
         lead: "A shopping edit of Free People Movement, picked and talked through by an instructor.",
@@ -318,24 +321,24 @@ const CATEGORIES = [
         why: "Fit is the top reason for returns. Honest fit content helps conversions and cuts returns.",
         greatFor: ["Intimates and loungewear", "Denim", "Tops and dresses"] }
     ] },
-  { id: "wellness", name: "Wellness", accent: "var(--jade)", title: "beautiful <em>rituals</em>",
-    blurb: "Calm, considered wellness, including traditional Chinese medicine rituals from my family.",
+  { id: "beauty", name: "Beauty", accent: "var(--plum)", title: "a beautiful <em>glow</em>",
+    blurb: "Everyday makeup, real routines and the products I actually reach for.",
     videos: [
-      { src: "", title: "A TCM ritual, explained", format: "To camera",
-        lead: "A traditional Chinese medicine practice, explained simply.",
-        shows: ["Education that feels personal", "The product as part of a ritual"],
-        why: "My wellness content converts views to follows. Teaching something new makes the product memorable.",
-        greatFor: ["Teas and tonics", "Supplements", "Skincare"] },
-      { src: "", title: "Morning reset", format: "Editorial b-roll",
-        lead: "A slow, cinematic morning routine in soft light.",
-        shows: ["Aesthetic detail shots", "Footage your team can cut into its own ads"],
-        why: "Moody, premium visuals lift a brand's perceived quality and work across paid and organic.",
-        greatFor: ["Skincare", "Candles and home", "Sleepwear"] },
-      { src: "", title: "Recovery night in", format: "Day in the life",
-        lead: "A slow evening in after teaching.",
-        shows: ["Rest as something to enjoy, not earn", "Product used in context"],
-        why: "Recovery is a fast-growing category, and it lands best from someone who trains for a living.",
-        greatFor: ["Loungewear", "Bath and body", "Recovery tools"] }
+      { src: "", title: "Everyday makeup", format: "Tutorial",
+        lead: "My go-to face, start to finish.",
+        shows: ["Each product applied on camera", "Natural light and real skin"],
+        why: "Tutorials show exactly how a product performs, which is what beauty shoppers want before they buy.",
+        greatFor: ["Complexion and skin tints", "Brows and lashes", "Lip products"] },
+      { src: "", title: "Sephora sale picks", format: "To camera",
+        lead: "What's worth buying in the sale, and why.",
+        shows: ["Quick, opinionated recommendations", "Products shown up close"],
+        why: "Sale and haul content catches shoppers at the moment they're ready to buy.",
+        greatFor: ["Beauty retailers", "Skincare", "Makeup launches"] },
+      { src: "", title: "Get ready with me", format: "GRWM",
+        lead: "Getting ready for the day, talking through it as I go.",
+        shows: ["Products used naturally in a real routine", "Personality and storytelling"],
+        why: "GRWMs hold attention the longest, so every product in them gets real screen time.",
+        greatFor: ["Skincare and makeup", "Fragrance", "Hair tools and haircare"] }
     ] },
   { id: "lifestyle", name: "Lifestyle", accent: "var(--claret)", title: "a beautiful <em>day</em>",
     blurb: "New York, savored: slow mornings, vintage shops, long dinners and weekends away.",
@@ -355,6 +358,25 @@ const CATEGORIES = [
         shows: ["Products chosen for real use", "Travel outfits and essentials"],
         why: "Packing videos are saved and rewatched, which keeps a product in front of shoppers longer.",
         greatFor: ["Luggage", "Travel-size beauty", "Loungewear", "Versatile clothing"] }
+    ] },
+  { id: "wellness", name: "Wellness", accent: "var(--jade)", title: "beautiful <em>rituals</em>",
+    blurb: "Calm, considered wellness, including traditional Chinese medicine rituals from my family.",
+    videos: [
+      { src: "", title: "A TCM ritual, explained", format: "To camera",
+        lead: "A traditional Chinese medicine practice, explained simply.",
+        shows: ["Education that feels personal", "The product as part of a ritual"],
+        why: "My wellness content converts views to follows. Teaching something new makes the product memorable.",
+        greatFor: ["Teas and tonics", "Supplements", "Skincare"] },
+      { src: "", title: "Morning reset", format: "Editorial b-roll",
+        lead: "A slow, cinematic morning routine in soft light.",
+        shows: ["Aesthetic detail shots", "Footage your team can cut into its own ads"],
+        why: "Moody, premium visuals lift a brand's perceived quality and work across paid and organic.",
+        greatFor: ["Skincare", "Candles and home", "Sleepwear"] },
+      { src: "", title: "Recovery night in", format: "Day in the life",
+        lead: "A slow evening in after teaching.",
+        shows: ["Rest as something to enjoy, not earn", "Product used in context"],
+        why: "Recovery is a fast-growing category, and it lands best from someone who trains for a living.",
+        greatFor: ["Loungewear", "Bath and body", "Recovery tools"] }
     ] }
 ];
 
@@ -368,12 +390,14 @@ function screenHTML(v) {
 }
 
 CATEGORIES.forEach(c => {
+  const shown = c.videos.map((v, i) => [v, i]).filter(([v]) => v.src || SHOW_PLACEHOLDERS);
+  if (!shown.length) return;
   const sec = document.createElement("section");
   sec.className = "cat"; sec.id = c.id;
   sec.style.setProperty("--accent", c.accent);
   sec.innerHTML = `
     <div class="cat-head"><div><span class="label pursuit">${c.name} · In pursuit of</span><h2>${c.title}</h2></div><p>${c.blurb}</p></div>
-    <div class="phones">${c.videos.map((v, i) => `
+    <div class="phones">${shown.map(([v, i]) => `
       <button class="phone" type="button" data-cat="${c.id}" data-i="${i}" aria-label="Open ${v.title}">
         <div class="screen">${screenHTML(v)}</div>
         <div class="meta"><b>${v.title}</b><span>${v.format}</span></div>
@@ -391,7 +415,8 @@ document.getElementById("chatBtn").href = chatHref;
 
 /* A link ending in #fashion (etc.) moves that row to the top */
 function applyHash() {
-  const id = location.hash.slice(1);
+  let id = location.hash.slice(1);
+  if (id === "fitness") id = "movement";
   const sec = document.getElementById(id);
   document.querySelectorAll(".cat").forEach(s => s.classList.remove("linked"));
   tabs.querySelectorAll("a").forEach(a => a.classList.toggle("on", a.dataset.cat === id));
