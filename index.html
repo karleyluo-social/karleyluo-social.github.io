@@ -283,11 +283,11 @@ const CATEGORIES = [
   { id: "fitness", name: "Fitness", accent: "var(--sage)", title: "beautiful <em>movement</em>",
     blurb: "Shot by a certified instructor, in real studios, on a body that actually works out.",
     videos: [
-      { src: "", title: "Reformer flow", format: "In motion",
-        lead: "A full reformer sequence with the product on a moving body.",
-        shows: ["How the piece moves, stretches and holds up mid-workout", "Real studio setting, not a staged set"],
-        why: "Movement proves performance claims better than a flat lay. Coming from an instructor, it reads as an expert's pick.",
-        greatFor: ["Activewear and sports bras", "Grip socks", "Shapewear", "Recovery tools"] },
+      { src: "videos/movement-1.mp4", poster: "videos/movement-1.jpg", title: "Cute activewear that isn't leggings", format: "To camera",
+        lead: "A shopping edit of Free People Movement, picked and talked through by an instructor.",
+        shows: ["Green-screen commentary over real product pages", "Prices, ratings and honest reactions to each piece", "A strong text hook in the first second"],
+        why: "Shoppers trust an instructor's eye on activewear. The format browses a whole collection in one minute and sends viewers straight to the product.",
+        greatFor: ["Activewear and athleisure", "Studio and lounge sets", "Retailers with a large catalog"] },
       { src: "", title: "Day of a Pilates instructor", format: "Day in the life",
         lead: "Teaching, moving and the small rituals between classes.",
         shows: ["The product used naturally through a teaching day", "Studio to street outfit changes"],
@@ -363,7 +363,7 @@ const work = document.getElementById("work");
 const tabs = document.getElementById("tabs");
 
 function screenHTML(v) {
-  if (v.src) return `<video src="${v.src}" muted loop playsinline autoplay preload="metadata"></video>`;
+  if (v.src) return `<video src="${v.src}"${v.poster ? ` poster="${v.poster}"` : ""} muted loop playsinline autoplay preload="metadata"></video>`;
   return `<div class="ph"><span class="soon">Video coming</span><span class="play" aria-hidden="true"></span><span class="cap">${v.title}</span></div>`;
 }
 
@@ -413,7 +413,7 @@ work.addEventListener("click", e => {
   const v = c.videos[+btn.dataset.i];
   dlg.style.setProperty("--accent", c.accent);
   $("dScreen").innerHTML = v.src
-    ? `<video src="${v.src}" controls playsinline autoplay loop></video>`
+    ? `<video src="${v.src}"${v.poster ? ` poster="${v.poster}"` : ""} controls playsinline autoplay loop></video>`
     : screenHTML(v);
   $("dTags").innerHTML = `<span class="tag cat-tag">${c.name}</span><span class="tag">${v.format}</span>`;
   $("dTitle").innerHTML = v.title;
