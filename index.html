@@ -7,7 +7,7 @@
 <meta name="description" content="Karley Luo — New York creator and Pilates instructor. UGC and brand content across movement, fashion, beauty, lifestyle and wellness.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Hanken+Grotesk:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
 <style>
 :root {
   /* Vol. 01 — a print issue on warm paper: espresso ink, one brown accent, a muted color per chapter */
@@ -21,7 +21,7 @@
   --rose: #94705c;   /* soft camel */
   --plum: #74476a;
   --jade: #3d7468;
-  --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --display: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif; /* light, even-weight sans for headlines */
   --read: "Newsreader", "Iowan Old Style", Georgia, serif;
   --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
@@ -208,6 +208,18 @@ footer .mono { margin: 0 auto; }
   footer { grid-template-columns: 1fr; text-align: center; }
   footer .r { text-align: center; }
 }
+/* ---------- minimal type: one even-weight sans for headlines, no italics ---------- */
+.name, .opener h2, .cat-head h3, .about h2, .contact h2, .info h4, .chapter b, .stat b, .svc .n, .meta .n, .ph .cap2, .strip figcaption .n, .mono { font-family: var(--display); font-weight: 300; font-style: normal; }
+.name { letter-spacing: -0.06em; }
+.name em, .opener h2 em, .cat-head h3 em, .about h2 em, .contact h2 em { font-style: normal; }
+.opener h2, .cat-head h3, .about h2, .contact h2, .info h4 { letter-spacing: -0.045em; }
+.chapter b { font-size: 34px; letter-spacing: 0.02em; }
+.meta .n, .svc .n, .strip figcaption .n { font-weight: 400; letter-spacing: 0.04em; font-size: 13px; }
+.svc .n { font-size: 15px; }
+.ph .cap2 { font-size: 20px; letter-spacing: -0.02em; }
+.mono { font-weight: 500; font-size: 12px; letter-spacing: 0.08em; }
+.tagline, .info .lead, .contact p, .cat-head h3 small { font-family: var(--body); font-style: normal; font-weight: 300; letter-spacing: -0.01em; }
+.figure figcaption i, .strip figcaption i, .creds li span:last-child { font-family: var(--body); font-style: normal; font-size: 13.5px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
 </style>
 </head>
