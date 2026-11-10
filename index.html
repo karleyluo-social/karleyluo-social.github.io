@@ -454,24 +454,24 @@ const CATEGORIES = [
         why: "Lip combos are one of beauty's most saved formats, and showing two products together sells both.",
         greatFor: ["Lip liners and glosses", "Lip care", "Product launches and bundles"] }
     ] },
-  { id: "lifestyle", name: "Lifestyle", accent: "var(--claret)", title: "Curating <em>the everyday.</em>",
-    blurb: "New York, savored: slow mornings, vintage shops, long dinners and weekends away.",
+  { id: "hospitality", name: "Hospitality", accent: "var(--claret)", title: "Curating <em>the table.</em>",
+    blurb: "Fine dining, natural wine and beautiful rooms, through a sommelier's eye.",
     videos: [
       { src: "videos/lifestyle-1.mp4", preview: "videos/lifestyle-1-preview.mp4", poster: "videos/lifestyle-1.jpg", title: "Girl dinner, 4 Charles", format: "Montage",
         lead: "A candlelit dinner in the West Village, shot moody and close.",
         shows: ["Food, candlelight and atmosphere", "A night out viewers want to copy"],
         why: "Restaurant content travels fast and makes viewers want to be there, which is what hospitality and food brands pay for.",
-        greatFor: ["Restaurants and hospitality", "Wine and spirits", "Going-out beauty and fragrance"] },
+        greatFor: ["Restaurants and hospitality groups", "Luxury and boutique hotels", "Wine and spirits"] },
       { src: "videos/lifestyle-2.mp4", preview: "videos/lifestyle-2-preview.mp4", poster: "videos/lifestyle-2.jpg", title: "Wine and a photo booth", format: "Montage",
         lead: "Natural wine, small plates and photo-booth strips, a perfect weeknight.",
         shows: ["Food, wine and the moments in between", "Photo strips as a built-in souvenir"],
         why: "Experience content makes viewers want to go, which is exactly what venues and drinks brands pay for.",
-        greatFor: ["Wine bars and restaurants", "Natural and DTC wine", "Film and photo brands"] },
+        greatFor: ["Wine bars and restaurants", "Boutique hotels and members clubs", "Natural and DTC wine"] },
       { src: "videos/lifestyle-3.mp4", preview: "videos/lifestyle-3-preview.mp4", poster: "videos/lifestyle-3.jpg", title: "Dinner at Four Horsemen", format: "Montage",
         lead: "Candlelit natural wine and dinner in Williamsburg.",
         shows: ["Bottles, plates and candlelight up close", "A moody, intimate night out"],
         why: "A sommelier's eye on the wine list gives restaurant content real credibility.",
-        greatFor: ["Natural wine importers and shops", "Restaurants and hospitality", "Glassware and hosting"] }
+        greatFor: ["Fine dining and hospitality groups", "Natural wine importers and shops", "Glassware and hosting"] }
     ] },
   { id: "wellness", name: "Wellness", accent: "var(--jade)", title: "Curating <em>ritual.</em>",
     blurb: "Calm, considered wellness, including traditional Chinese medicine rituals from my family.",
@@ -549,6 +549,7 @@ document.getElementById("chatBtn").href = chatHref;
 function applyHash() {
   let id = location.hash.slice(1);
   if (id === "fitness") id = "movement";
+  if (id === "lifestyle") id = "hospitality";
   const sec = document.getElementById(id);
   document.querySelectorAll(".cat").forEach(s => s.classList.remove("linked"));
   tabs.querySelectorAll("a").forEach(a => a.classList.toggle("on", a.dataset.cat === id));
