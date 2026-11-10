@@ -220,6 +220,7 @@ footer .mono { margin: 0 auto; }
 .mono { font-weight: 500; font-size: 12px; letter-spacing: 0.08em; }
 .tagline, .info .lead, .contact p, .cat-head h3 small { font-family: var(--body); font-style: normal; font-weight: 300; letter-spacing: -0.01em; }
 .figure figcaption i, .strip figcaption i, .creds li span:last-child { font-family: var(--body); font-style: normal; font-size: 13.5px; }
+.phones.n4 { grid-template-columns: repeat(4, 1fr); }
 /* ---------- phone frames ---------- */
 .screen { border-radius: 30px; border: 7px solid var(--ink); background: #2a2420; box-shadow: 0 24px 48px -28px rgba(28, 23, 20, 0.55), inset 0 0 0 1px rgba(255,255,255,0.06); }
 .screen::before { content: ""; position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 30%; max-width: 86px; height: 18px; border-radius: 12px; background: var(--ink); z-index: 2; }
@@ -434,7 +435,12 @@ const CATEGORIES = [
         lead: "What's worth buying in the sale, and why.",
         shows: ["Honest, quick recommendations", "Products shown up close in use"],
         why: "Sale content catches shoppers at the moment they're ready to buy.",
-        greatFor: ["Beauty retailers", "Makeup and skincare brands", "Seasonal launches"] }
+        greatFor: ["Beauty retailers", "Makeup and skincare brands", "Seasonal launches"] },
+      { src: "videos/beauty-4.mp4", preview: "videos/beauty-4-preview.mp4", poster: "videos/beauty-4.jpg", title: "The lip combo", format: "Tutorial",
+        lead: "Liner, then gloss: my everyday lip, built step by step.",
+        shows: ["Each product applied close to camera", "A finished look viewers can copy in seconds"],
+        why: "Lip combos are one of beauty's most saved formats, and showing two products together sells both.",
+        greatFor: ["Lip liners and glosses", "Lip care", "Product launches and bundles"] }
     ] },
   { id: "lifestyle", name: "Lifestyle", accent: "var(--claret)", title: "Curating <em>the everyday.</em>",
     blurb: "New York, savored: slow mornings, vintage shops, long dinners and weekends away.",
@@ -501,7 +507,7 @@ CATEGORIES.forEach(c => {
       <h3><small>${c.name}</small>${c.title}</h3>
       <p>${c.blurb}</p>
     </div>
-    <div class="phones">${shown.map(([v, i], k) => `
+    <div class="phones${shown.length === 4 ? " n4" : ""}">${shown.map(([v, i], k) => `
       <button class="phone" type="button" data-cat="${c.id}" data-i="${i}" aria-label="Open ${v.title}">
         <div class="screen">${screenHTML(v)}</div>
         <div class="meta"><span class="n">${num}.${k + 1}</span><b>${v.title}</b><span>${v.format}</span></div>
