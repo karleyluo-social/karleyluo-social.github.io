@@ -449,12 +449,7 @@ const CATEGORIES = [
         lead: "From workout set to going-out outfit, in one get-ready.",
         shows: ["Activewear and everyday clothes in one video", "A natural, real-life routine"],
         why: "Showing a product before and after the studio proves it fits into a real day.",
-        greatFor: ["Activewear and athleisure", "Everyday basics", "Shoes and accessories"] },
-      { src: "videos/fashion-3.mp4", preview: "videos/fashion-3-preview.mp4", poster: "videos/fashion-3.jpg", title: "Halloween costume ideas", format: "Roundup",
-        lead: "Easy costume ideas, pulled from film and pop culture.",
-        shows: ["Seasonal, highly shareable ideas", "Personality and humor"],
-        why: "Seasonal roundups are saved and shared at the moment people are ready to buy.",
-        greatFor: ["Trend retailers", "Accessories", "Costume-friendly beauty"] }
+        greatFor: ["Activewear and athleisure", "Everyday basics", "Shoes and accessories"] }
     ] },
   { id: "beauty", name: "Beauty", accent: "var(--plum)", title: "Curating <em>the glow.</em>",
     blurb: "Everyday makeup, real routines and the products I actually reach for.",
@@ -588,6 +583,9 @@ const VIRAL = [
   { src: "videos/viral-1.mp4", preview: "", poster: "videos/viral-1.jpg", platform: "TikTok", title: "The flex wall apartment",
     stats: [["3.3M", "Views"], ["196K", "Likes"], ["14.5s", "Avg. watch on a 13.7s video"], ["51%", "Watched to the end"]],
     why: ["A real search term on screen in the first second: “flex wall apartment”", "Under 14 seconds, so it loops and viewers rewatch", "A familiar New York problem, shown beautifully"] }
+  ,{ src: "videos/fashion-3.mp4", preview: "videos/fashion-3-preview.mp4", poster: "videos/fashion-3.jpg", platform: "Instagram", title: "Niche Halloween costumes",
+    stats: [["267K", "Views"], ["9.8K", "Shares"], ["2.3K", "Saves"], ["20s", "Avg. watch time"]],
+    why: ["Made for a specific community, so viewers sent it to friends: more shares than likes", "A numbered list hook (“5 niche costumes”) keeps people watching to the end", "Posted right as people were searching for costume ideas"] }
 ];
 document.getElementById("viralList").innerHTML = VIRAL.map(v => `
   <article class="vcard">
